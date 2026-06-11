@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fenet Diriba</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#fffef9;
+  --ink:#1a1a18;
+  --ink2:#3a3a38;
+  --ink3:#777770;
+  --rule:#c8c8c0;
+  --accent:#8b1a1a;
+  --link:#1a3a8b;
+  --serif:'IM Fell English',Georgia,serif;
+  --mono:'Courier New',Courier,monospace;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:11.5pt;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:720px;margin:0 auto;padding:3rem 2.5rem 4rem}
+
+.paper-header{text-align:center;margin-bottom:2rem}
+.paper-title{font-size:17pt;font-weight:700;letter-spacing:0.01em;margin-bottom:0.3rem;line-height:1.2}
+.paper-author{font-size:12pt;margin-bottom:0.15rem}
+.paper-affil{font-size:10pt;color:var(--ink3);font-style:italic;margin-bottom:0.15rem}
+.paper-contact{font-size:9.5pt;color:var(--link);font-family:var(--mono);margin-top:0.3rem}
+.paper-contact a{color:var(--link);text-decoration:none}
+.paper-contact a:hover{text-decoration:underline}
+
+.hr-thick{height:2px;background:var(--ink);margin:0.6rem 0 0.3rem}
+.hr-thin{height:0.5px;background:var(--ink);margin:0.3rem 0 1.2rem}
+.hr-single{height:0.5px;background:var(--rule);margin:1.5rem 0}
+
+.abstract{margin:0 2.5rem 2rem;font-size:10.5pt;line-height:1.6}
+.abstract-title{text-align:center;font-weight:700;font-size:10.5pt;margin-bottom:0.5rem;letter-spacing:0.05em}
+.abstract p{text-indent:0;color:var(--ink2)}
+
+.toc{margin:0 2rem 2.5rem;font-size:10pt}
+.toc-title{font-weight:700;font-size:10.5pt;text-align:center;margin-bottom:0.75rem;letter-spacing:0.05em}
+.toc-row{display:flex;align-items:baseline;margin-bottom:0.25rem}
+.toc-num{width:1.8rem;flex-shrink:0;color:var(--ink3)}
+.toc-text{flex:1;color:var(--ink2)}
+.toc-dots{flex:1;border-bottom:1px dotted var(--rule);margin:0 0.4rem 0.2rem;min-width:2rem}
+.toc-page{color:var(--ink3);font-family:var(--mono);font-size:9pt}
+
+.sec{margin-top:2.5rem}
+.sec-num-title{font-size:12pt;font-weight:700;margin-bottom:0.75rem;letter-spacing:0.01em}
+.sec-num{margin-right:0.5rem}
+.subsec-title{font-size:11pt;font-weight:700;font-style:italic;margin:1.2rem 0 0.5rem}
+
+p{text-indent:1.5em;margin-bottom:0.4rem;color:var(--ink2);font-size:11pt;line-height:1.7;text-align:justify;hyphens:auto}
+p.noindent{text-indent:0}
+
+.theorem{margin:1.2rem 0;padding:0.75rem 1rem;border-left:2px solid var(--ink);font-style:italic;color:var(--ink2);font-size:10.5pt}
+.theorem-label{font-weight:700;font-style:normal;margin-right:0.4rem}
+.definition{margin:1.2rem 0;padding:0.75rem 1rem;border:0.5px solid var(--rule);background:#faf9f4;font-size:10.5pt}
+.definition-label{font-weight:700;font-style:italic;margin-right:0.4rem;color:var(--ink)}
+.remark{margin:1.2rem 0;padding:0.6rem 1rem;border-left:1.5px solid var(--rule);color:var(--ink3);font-size:10pt;font-style:italic}
+.remark-label{font-weight:700;font-style:normal;color:var(--ink2);margin-right:0.3rem}
+
+.equation{text-align:center;margin:1.2rem 2rem;font-family:var(--mono);font-size:10.5pt;color:var(--ink);position:relative}
+.eq-num{position:absolute;right:0;top:50%;transform:translateY(-50%);color:var(--ink3);font-size:9.5pt}
+
+.latex-table{margin:1.2rem auto;border-collapse:collapse;font-size:10pt;width:100%}
+.latex-table caption{font-size:9.5pt;font-style:italic;margin-bottom:0.4rem;color:var(--ink3);caption-side:top;text-align:center}
+.latex-table thead tr{border-top:1.5px solid var(--ink);border-bottom:0.5px solid var(--ink)}
+.latex-table th{padding:0.3rem 0.75rem;font-weight:700;text-align:left;font-style:italic;font-size:10pt}
+.latex-table td{padding:0.4rem 0.75rem;color:var(--ink2);vertical-align:top;border-bottom:0.5px solid #ebebeb}
+.latex-table tr:last-child td{border-bottom:none}
+
+.itemize{margin:0.5rem 0 0.75rem 2rem;font-size:10.5pt;color:var(--ink2)}
+.itemize li{margin-bottom:0.3rem;line-height:1.6;list-style:none;position:relative;padding-left:1rem}
+.itemize li::before{content:'—';position:absolute;left:0;color:var(--ink3)}
+
+.stag{display:inline-block;font-family:var(--mono);font-size:8.5pt;color:var(--ink3);border:0.5px solid var(--rule);padding:0 5px;margin:2px 2px 0 0}
+
+.qed-line{display:flex;justify-content:flex-end;margin-top:1rem;font-size:14pt;color:var(--ink)}
+
+.references{font-size:9.5pt;color:var(--ink2)}
+.ref-item{margin-bottom:0.4rem;padding-left:2rem;text-indent:-2rem;line-height:1.5}
+.ref-label{color:var(--ink);font-weight:700;margin-right:0.4rem}
+
+.footnote-rule{border-top:0.5px solid var(--ink);width:30%;margin:2rem 0 0.5rem}
+.footnote{font-size:9pt;color:var(--ink3);line-height:1.5}
+
+.reveal{opacity:0;transform:translateY(10px);transition:opacity 0.5s,transform 0.5s}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:640px){
+  .page{padding:2rem 1.25rem 3rem}
+  .abstract{margin:0 0 2rem}
+  .toc{margin:0 0 2rem}
+  .equation{margin:1rem 0}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TITLE -->
+  <div class="paper-header">
+    <div class="paper-title">Fenet Diriba</div>
+    <div class="paper-affil">Department of Computer Science and Mathematics</div>
+    <div class="paper-affil">Gettysburg College, Gettysburg PA 17325</div>
+    <div class="paper-contact">
+      <a href="mailto:fenetsolomon87@gmail.com">fenetsolomon87@gmail.com</a> &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/fenet-diriba" target="_blank">linkedin/fenet-diriba</a> &nbsp;·&nbsp;
+      <a href="https://github.com/fenetdiriba" target="_blank">github/fenetdiriba</a>
+    </div>
+  </div>
+
+  <div class="hr-thick"></div>
+  <div class="hr-thin"></div>
+
+  <!-- ABSTRACT -->
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    <p class="noindent">Rising sophomore, Computer Science and Mathematics, Gettysburg College (GPA: 3.71/4.0, expected May 2029). I enjoy building things that are mathematically grounded — financial tools, simulations, algorithms. Interested in fintech, quantitative finance, and software engineering.</p>
+  </div>
+
+  <div class="hr-thin" style="margin-bottom:1.5rem"></div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <div class="toc-row"><span class="toc-num">1.</span><span class="toc-text">Background</span><span class="toc-dots"></span><span class="toc-page">1</span></div>
+    <div class="toc-row"><span class="toc-num">2.</span><span class="toc-text">Experience</span><span class="toc-dots"></span><span class="toc-page">2</span></div>
+    <div class="toc-row"><span class="toc-num">3.</span><span class="toc-text">Projects</span><span class="toc-dots"></span><span class="toc-page">3</span></div>
+    <div class="toc-row"><span class="toc-num">4.</span><span class="toc-text">Skills</span><span class="toc-dots"></span><span class="toc-page">5</span></div>
+    <div class="toc-row"><span class="toc-num">5.</span><span class="toc-text">Conclusion</span><span class="toc-dots"></span><span class="toc-page">6</span></div>
+  </div>
+
+  <div class="hr-thin"></div>
+
+  <!-- §1 BACKGROUND -->
+  <div class="sec reveal" id="background">
+    <div class="sec-num-title"><span class="sec-num">1.</span>Background</div>
+
+    <p class="noindent">I double-major in Computer Science and Mathematics. Coursework so far: Linear Algebra, Multivariable Calculus, Scientific Computation, Abstract Math. Teaching Assistant for Scientific Computation and Calculus II — weekly sessions and office hours.</p>
+
+    <div class="theorem">
+      <span class="theorem-label">Observation 1.1.</span>
+      The best way to understand something deeply is to explain it to someone who doesn't yet.
+    </div>
+
+
+  </div>
+
+  <div class="hr-single"></div>
+
+  <!-- §2 EXPERIENCE -->
+  <div class="sec reveal" id="experience">
+    <div class="sec-num-title"><span class="sec-num">2.</span>Experience</div>
+
+    <table class="latex-table">
+      <caption>Table 1: Experience record.</caption>
+      <thead>
+        <tr>
+          <th>Organization</th>
+          <th>Role</th>
+          <th>Period</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Goldman Sachs</strong></td>
+          <td>Remote Possibilities Series — Participant. Exposure to financial markets, investment strategy, and technology in finance.</td>
+          <td style="white-space:nowrap;font-family:var(--mono);font-size:9pt">Apr 2026</td>
+        </tr>
+        <tr>
+          <td><strong>BNY</strong></td>
+          <td>Pre-Internship Program — Participant. Training in data-driven decision making and global financial markets.</td>
+          <td style="white-space:nowrap;font-family:var(--mono);font-size:9pt">Sum 2026</td>
+        </tr>
+        <tr>
+          <td><strong>AI4ALL</strong></td>
+          <td>Participant. Applied AI and machine learning with a focus on finance and business applications.</td>
+          <td style="white-space:nowrap;font-family:var(--mono);font-size:9pt">Sum 2026</td>
+        </tr>
+        <tr>
+          <td><strong>Gettysburg College</strong></td>
+          <td>Teaching Assistant — Scientific Computation and Calculus II. Weekly sessions and office hours.</td>
+          <td style="white-space:nowrap;font-family:var(--mono);font-size:9pt">Jan 2026–Present</td>
+        </tr>
+        <tr>
+          <td><strong>Gettysburg College</strong></td>
+          <td>CalcAid Tutor — one-on-one support across all calculus levels.</td>
+          <td style="white-space:nowrap;font-family:var(--mono);font-size:9pt">Jan 2026–Present</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="hr-single"></div>
+
+  <!-- §3 PROJECTS -->
+  <div class="sec reveal" id="projects">
+    <div class="sec-num-title"><span class="sec-num">3.</span>Projects</div>
+
+
+    <div class="subsec-title">3.1 &nbsp; Earnings Surprise Predictor</div>
+    <div class="definition">
+      <span class="definition-label">Project 3.1.</span>
+      Predicts whether a company will beat or miss Wall Street earnings estimates. Combines NLP sentiment analysis on earnings call transcripts with financial metrics. Group project for AI4ALL.
+    </div>
+    <p class="noindent">Two signals: what executives say on earnings calls (processed with FinBERT, a financial language model) and quantitative metrics like estimate revisions and past earnings history. Trained and validated on S&P 500 data.</p>
+    <p>Stack: <span class="stag">Python</span><span class="stag">FinBERT</span><span class="stag">XGBoost</span><span class="stag">scikit-learn</span><span class="stag">Pandas</span></p>
+
+    <div class="subsec-title">3.2 &nbsp; Study Optimizer</div>
+    <p class="noindent">Java CLI app. Schedules study sessions using a priority algorithm based on difficulty and time-to-exam. Generates spaced repetition at +1, +3, +7, +14 day intervals. JSON persistence via Jackson.</p>
+    <p>Stack: <span class="stag">Java</span><span class="stag">OOP</span><span class="stag">Jackson</span><span class="stag">Data Structures</span></p>
+
+    <div class="subsec-title">3.3 &nbsp; Epidemic Spread Simulator</div>
+    <p class="noindent">SIR and SEIR compartmental models with parameter sweeps. Analyzed how transmission and recovery rates affect outbreak curves. Visualized with Matplotlib.</p>
+    <div class="equation">
+      dI/dt = βSI − γI
+      <span class="eq-num">(3.1)</span>
+    </div>
+    <p>Stack: <span class="stag">Python</span><span class="stag">NumPy</span><span class="stag">Matplotlib</span><span class="stag">SIR/SEIR</span></p>
+  </div>
+
+  <div class="hr-single"></div>
+
+  <!-- §4 SKILLS -->
+  <div class="sec reveal" id="skills">
+    <div class="sec-num-title"><span class="sec-num">4.</span>Skills</div>
+
+    <div class="subsec-title">4.1 &nbsp; Languages</div>
+    <ul class="itemize">
+      <li>Python</li>
+      <li>Java</li>
+      <li>C++</li>
+    </ul>
+
+    <div class="subsec-title">4.2 &nbsp; Mathematics</div>
+    <ul class="itemize">
+      <li>Linear Algebra, Multivariable Calculus, Abstract Math, Probability Modeling, Numerical Methods</li>
+      <li>Real Analysis, Abstract Algebra, Data Structures and Algorithms</li>
+    </ul>
+
+    <div class="subsec-title">4.3 &nbsp; Tools</div>
+    <ul class="itemize">
+      <li>NumPy, SciPy, Pandas, Matplotlib, Plotly</li>
+      <li>scikit-learn, XGBoost, FinBERT</li>
+      <li>FastAPI, Streamlit, Git/GitHub</li>
+    </ul>
+  </div>
+
+  <div class="hr-single"></div>
+
+  <!-- §5 CONCLUSION -->
+  <div class="sec reveal" id="conclusion">
+    <div class="sec-num-title"><span class="sec-num">5.</span>Conclusion</div>
+
+    <p class="noindent">Always open to connecting, sharing ideas, and learning from people doing interesting work. If something here resonates — reach out.</p>
+
+    <div class="theorem">
+      <span class="theorem-label">Proposition 5.1.</span>
+      <em>There exists a role r such that Fenet is a good fit for r. The proof is left as an exercise to you.</em>
+    </div>
+
+    <div class="qed-line">□</div>
+  </div>
+
+  <div class="hr-thin" style="margin-top:2.5rem"></div>
+
+  <!-- CONTACT -->
+  <div class="sec reveal" id="contact">
+    <div class="sec-num-title">Contact</div>
+    <div class="references">
+      <div class="ref-item"><span class="ref-label">[Email]</span> <a href="mailto:fenetsolomon87@gmail.com" style="color:var(--link)">fenetsolomon87@gmail.com</a></div>
+      <div class="ref-item"><span class="ref-label">[LinkedIn]</span> <a href="https://linkedin.com/in/fenet-diriba" target="_blank" style="color:var(--link)">linkedin.com/in/fenet-diriba</a></div>
+      <div class="ref-item"><span class="ref-label">[GitHub]</span> <a href="https://github.com/fenetdiriba" target="_blank" style="color:var(--link)">github.com/fenetdiriba</a></div>
+    </div>
+  </div>
+
+  <div style="margin-top:3rem">
+    <div class="footnote-rule"></div>
+    <div class="footnote">Built with love and a concerning amount of caffeine.</div>
+  </div>
+
+</div>
+<script>
+const els=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}});
+},{threshold:0.08});
+els.forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
