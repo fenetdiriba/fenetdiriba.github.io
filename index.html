@@ -149,14 +149,13 @@ p.noindent{text-indent:0}
   <div class="sec reveal" id="background">
     <div class="sec-num-title"><span class="sec-num">1.</span>Background</div>
 
-    <p class="noindent">I double-major in Computer Science and Mathematics. Coursework so far: Linear Algebra, Multivariable Calculus, Scientific Computation, Abstract Math. Teaching Assistant for Scientific Computation and Calculus II — running workshops, weekly sessions, and office hours.</p>
+    <p class="noindent">I double-major in Computer Science and Mathematics. Coursework so far: Linear Algebra, Multivariable Calculus, Scientific Computation, Abstract Math. Teaching Assistant for Scientific Computation and Calculus II — weekly sessions and office hours.</p>
 
     <div class="theorem">
       <span class="theorem-label">Observation 1.1.</span>
       The best way to understand something deeply is to explain it to someone who doesn't yet.
     </div>
 
-    <p>The math and the code are not separate things to me. The same differential equations that describe heat diffusion show up in how markets price risk. Finding those connections is what keeps me going at 2am.</p>
 
   </div>
 
@@ -193,7 +192,7 @@ p.noindent{text-indent:0}
         </tr>
         <tr>
           <td><strong>Gettysburg College</strong></td>
-          <td>Teaching Assistant — Scientific Computation and Calculus II. Workshops, weekly sessions, office hours.</td>
+          <td>Teaching Assistant — Scientific Computation and Calculus II. Weekly sessions and office hours.</td>
           <td style="white-space:nowrap;font-family:var(--mono);font-size:9pt">Jan 2026–Present</td>
         </tr>
         <tr>
@@ -211,27 +210,20 @@ p.noindent{text-indent:0}
   <div class="sec reveal" id="projects">
     <div class="sec-num-title"><span class="sec-num">3.</span>Projects</div>
 
-    <div class="subsec-title">3.1 &nbsp; Options Pricing Engine</div>
+
+    <div class="subsec-title">3.1 &nbsp; Earnings Surprise Predictor</div>
     <div class="definition">
       <span class="definition-label">Project 3.1.</span>
-      Live options analysis tool: Black-Scholes pricing, Greek calculations (Δ, Γ, Θ, ν), and a 3D implied volatility surface. Python, FastAPI backend, Streamlit interface.
-    </div>
-    <p class="noindent">Black-Scholes prices an option using five inputs — stock price, strike, time, interest rate, and volatility — and outputs a theoretical fair value. The Greeks tell you how sensitive that price is to each input. Implied volatility works backwards from a market price, solved numerically since there is no closed-form answer.</p>
-    <p>Stack: <span class="stag">Python</span><span class="stag">NumPy</span><span class="stag">SciPy</span><span class="stag">Plotly</span><span class="stag">FastAPI</span><span class="stag">Streamlit</span><span class="stag">yfinance</span></p>
-
-    <div class="subsec-title">3.2 &nbsp; Earnings Surprise Predictor</div>
-    <div class="definition">
-      <span class="definition-label">Project 3.2.</span>
       Predicts whether a company will beat or miss Wall Street earnings estimates. Combines NLP sentiment analysis on earnings call transcripts with financial metrics. Group project for AI4ALL.
     </div>
     <p class="noindent">Two signals: what executives say on earnings calls (processed with FinBERT, a financial language model) and quantitative metrics like estimate revisions and past earnings history. Trained and validated on S&P 500 data.</p>
     <p>Stack: <span class="stag">Python</span><span class="stag">FinBERT</span><span class="stag">XGBoost</span><span class="stag">scikit-learn</span><span class="stag">Pandas</span></p>
 
-    <div class="subsec-title">3.3 &nbsp; Study Optimizer</div>
+    <div class="subsec-title">3.2 &nbsp; Study Optimizer</div>
     <p class="noindent">Java CLI app. Schedules study sessions using a priority algorithm based on difficulty and time-to-exam. Generates spaced repetition at +1, +3, +7, +14 day intervals. JSON persistence via Jackson.</p>
     <p>Stack: <span class="stag">Java</span><span class="stag">OOP</span><span class="stag">Jackson</span><span class="stag">Data Structures</span></p>
 
-    <div class="subsec-title">3.4 &nbsp; Epidemic Spread Simulator</div>
+    <div class="subsec-title">3.3 &nbsp; Epidemic Spread Simulator</div>
     <p class="noindent">SIR and SEIR compartmental models with parameter sweeps. Analyzed how transmission and recovery rates affect outbreak curves. Visualized with Matplotlib.</p>
     <div class="equation">
       dI/dt = βSI − γI
