@@ -216,13 +216,20 @@ p.noindent{text-indent:0}
   <div class="sec reveal" id="projects">
     <div class="sec-num-title"><span class="sec-num">3.</span>Projects</div>
 
-    <div class="subsec-title">3.1 &nbsp; PeerCodeAI</div>
+    <div class="subsec-title">3.1 &nbsp; PeerCode AI</div>
     <div class="definition">
       <span class="definition-label">Project 3.1.</span>
-      A real-time collaborative code editor and interview-partner matchmaking platform, built solo.
+      A real-time collaborative code editor for interview practice, with skill-based partner matchmaking. Built solo and deployed.
     </div>
-    <p class="noindent">Uses Yjs CRDTs and y-webrtc for peer-to-peer document sync that converges to a consistent state across peers without a centralized server. Matches interview partners with cosine similarity on skill embeddings, with AI-assisted code hints in the Monaco Editor via the Gemini API.</p>
-    <p>Stack: <span class="stag">JavaScript</span><span class="stag">Next.js</span><span class="stag">Yjs</span><span class="stag">CRDTs</span><span class="stag">WebRTC</span><span class="stag">Gemini API</span></p>
+    <p class="noindent">Two people edit the same file at once: every keystroke is a Yjs CRDT operation, so concurrent edits merge to the same result on every client, with live cursors, presence, and synced chat. Updates travel browser-to-browser over WebRTC, and a Node.js WebSocket relay takes over on networks that block direct connections, such as mobile carriers and campus Wi-Fi. A sandboxed Web Worker runs JavaScript and TypeScript in the browser.</p>
+    <p>Matchmaking encodes each skill profile (languages, topics, level) as a 15-dimensional vector and pairs the closest people in the queue by cosine similarity, with a threshold that relaxes over time so no one waits indefinitely:</p>
+    <div class="equation">
+      sim(a, b) = (a · b) / (‖a‖ ‖b‖)
+      <span class="eq-num">(3.1)</span>
+    </div>
+    <p class="noindent">A Gemini-powered code assistant (Ctrl/Cmd+K) that edits code through the shared document is in final testing.</p>
+    <p class="noindent">Links: <a href="https://peer-code-ai.vercel.app" target="_blank" style="color:var(--link)">live demo</a> &nbsp;·&nbsp; <a href="https://github.com/fenetdiriba/PeerCode-AI" target="_blank" style="color:var(--link)">source</a></p>
+    <p>Stack: <span class="stag">TypeScript</span><span class="stag">React</span><span class="stag">Node.js</span><span class="stag">Yjs</span><span class="stag">CRDTs</span><span class="stag">WebRTC</span><span class="stag">WebSockets</span><span class="stag">Gemini API</span></p>
 
     <div class="subsec-title">3.2 &nbsp; CreditGuard</div>
     <div class="definition">
@@ -236,7 +243,7 @@ p.noindent{text-indent:0}
     <p class="noindent">A stochastic SEIR epidemic simulation in C++ modeling viral transmission across 10,000 agents over 150 days, using binomial-distribution state transitions to capture real-world variance instead of deterministic outcomes. Parallelized 30 simulation runs across 3 intervention scenarios with per-thread RNGs to avoid data races.</p>
     <div class="equation">
       dI/dt = βSI − γI
-      <span class="eq-num">(3.1)</span>
+      <span class="eq-num">(3.2)</span>
     </div>
     <p>Stack: <span class="stag">C++</span><span class="stag">Linux</span><span class="stag">Multithreading</span><span class="stag">Stochastic Modeling</span></p>
 
@@ -268,7 +275,7 @@ p.noindent{text-indent:0}
 
     <div class="subsec-title">5.1 &nbsp; Languages</div>
     <ul class="itemize">
-      <li>C++, Java, Python, JavaScript</li>
+      <li>C++, Java, Python, JavaScript, TypeScript</li>
     </ul>
 
     <div class="subsec-title">5.2 &nbsp; Mathematics</div>
@@ -281,7 +288,7 @@ p.noindent{text-indent:0}
     <ul class="itemize">
       <li>Git/GitHub, Systems Programming, Multithreading, Linux, SQL, AWS, REST APIs, CI/CD</li>
       <li>NumPy, Pandas, Matplotlib, scikit-learn, XGBoost, LightGBM, SHAP, Fairlearn</li>
-      <li>FastAPI, Flask, Streamlit, Yjs, LangChain</li>
+      <li>React, Node.js, WebSockets, WebRTC, FastAPI, Flask, Streamlit, Yjs, LangChain</li>
     </ul>
   </div>
 
