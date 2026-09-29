@@ -178,7 +178,7 @@ p.noindent{text-indent:0}
       <tbody>
         <tr>
           <td><strong>AI4ALL</strong></td>
-          <td>Ignite Fellow. Designed CreditGuard, a bias-audited credit risk model, with a 2-person team and an AI industry mentor, applying ethical AI, data privacy, and algorithmic fairness principles.</td>
+          <td>Ignite Fellow. Built flit.ai, an explainable credit risk assistant (LightGBM + SHAP, ~900K loans), with a 3-person team and an AI industry mentor, applying ethical AI, data privacy, and algorithmic fairness principles.</td>
           <td style="white-space:nowrap;font-family:var(--mono);font-size:9pt">May 2026–Present</td>
         </tr>
         <tr>
@@ -231,13 +231,14 @@ p.noindent{text-indent:0}
     <p class="noindent">Links: <a href="https://peer-code-ai.vercel.app" target="_blank" style="color:var(--link)">live demo</a> &nbsp;·&nbsp; <a href="https://github.com/fenetdiriba/PeerCode-AI" target="_blank" style="color:var(--link)">source</a></p>
     <p>Stack: <span class="stag">TypeScript</span><span class="stag">React</span><span class="stag">Node.js</span><span class="stag">Yjs</span><span class="stag">CRDTs</span><span class="stag">WebRTC</span><span class="stag">WebSockets</span><span class="stag">Gemini API</span></p>
 
-    <div class="subsec-title">3.2 &nbsp; CreditGuard</div>
+    <div class="subsec-title">3.2 &nbsp; flit.ai</div>
     <div class="definition">
       <span class="definition-label">Project 3.2.</span>
-      A bias-aware credit risk model, designed with a 2-person team and an AI industry mentor through AI4ALL Ignite.
+      A credit risk assistant built to improve financial literacy, developed with a 3-person team through the AI4ALL Ignite Accelerator.
     </div>
-    <p class="noindent">Audited for demographic bias, reducing the gender approval gap from 12 points to roughly 3% while keeping accuracy loss under 2%. Presented the bias-mitigation results to industry recruiters at AI4ALL's closing symposium; the interface surfaces an accept/reject prediction alongside a plain-language, SHAP-based explanation of what drove it.</p>
-    <p>Stack: <span class="stag">LightGBM</span><span class="stag">Fairlearn</span><span class="stag">AIF360</span><span class="stag">SHAP</span><span class="stag">Streamlit</span></p>
+    <p class="noindent">Borrowers rarely see why they are flagged as high risk. flit.ai takes application-time financial data and returns the probability of default, along with the five factors that pushed the prediction up or down, computed per applicant with SHAP. The LightGBM model is trained on roughly 900,000 resolved LendingClub loans (25 features, test AUC 0.73). It was chosen over logistic regression and random forest, which performed similarly, for its native SHAP support and fast inference. Served through a FastAPI backend with a web interface; the analysis also documents the survivorship bias of training only on accepted loans.</p>
+    <p class="noindent">Links: <a href="https://flit-ai.onrender.com/" target="_blank" style="color:var(--link)">live demo</a> &nbsp;·&nbsp; <a href="https://github.com/a-jaa/flit" target="_blank" style="color:var(--link)">source</a></p>
+    <p>Stack: <span class="stag">Python</span><span class="stag">LightGBM</span><span class="stag">SHAP</span><span class="stag">scikit-learn</span><span class="stag">pandas</span><span class="stag">FastAPI</span></p>
 
     <div class="subsec-title">3.3 &nbsp; Epidemic Spread Simulator</div>
     <p class="noindent">A stochastic SEIR epidemic simulation in C++ modeling viral transmission across 10,000 agents over 150 days, using binomial-distribution state transitions to capture real-world variance instead of deterministic outcomes. Parallelized 30 simulation runs across 3 intervention scenarios with per-thread RNGs to avoid data races.</p>
