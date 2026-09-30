@@ -82,6 +82,7 @@ p.noindent{text-indent:0}
 .itemize li{margin-bottom:0.3rem;line-height:1.6;list-style:none;position:relative;padding-left:1rem}
 .itemize li::before{content:'—';position:absolute;left:0;color:var(--ink3)}
 
+code{font-family:var(--mono);font-size:9.5pt;color:var(--ink)}
 .stag{display:inline-block;font-family:var(--mono);font-size:8.5pt;color:var(--ink3);border:0.5px solid var(--rule);padding:0 5px;margin:2px 2px 0 0}
 
 .qed-line{display:flex;justify-content:flex-end;margin-top:1rem;font-size:14pt;color:var(--ink)}
@@ -241,16 +242,21 @@ p.noindent{text-indent:0}
     <p>Stack: <span class="stag">Python</span><span class="stag">LightGBM</span><span class="stag">SHAP</span><span class="stag">scikit-learn</span><span class="stag">pandas</span><span class="stag">FastAPI</span></p>
 
     <div class="subsec-title">3.3 &nbsp; Epidemic Spread Simulator</div>
-    <p class="noindent">A stochastic SEIR epidemic simulation in C++ modeling viral transmission across 10,000 agents over 150 days, using binomial-distribution state transitions to capture real-world variance instead of deterministic outcomes. Parallelized 30 simulation runs across 3 intervention scenarios with per-thread RNGs to avoid data races.</p>
+    <p class="noindent">A stochastic SEIR simulator in C++17 that models an outbreak in a population of 10,000 over 150 days and compares interventions (masks, a day-20 lockdown) across parallel random trials, reporting 95% confidence intervals. Each day's transitions are random binomial draws rather than fixed fractions:</p>
     <div class="equation">
-      dI/dt = βSI − γI
+      S → E ~ Binomial(S, 1 − e<sup>−βmI/N</sup>)
       <span class="eq-num">(3.2)</span>
     </div>
-    <p>Stack: <span class="stag">C++</span><span class="stag">Linux</span><span class="stag">Multithreading</span><span class="stag">Stochastic Modeling</span></p>
+    <p class="noindent">The simulator is checked against theory. As N grows, runs converge to the deterministic limit with error shrinking at a fitted log-log slope of −0.51 (theory: −1/2). An exact branching-process calculation of outbreak extinction probability matches simulation, and shows that the textbook 1/R<sub>0</sub> estimate is about 10 points too high for a daily-step model.</p>
+    <p>Runs are parallelized with a <code>std::thread</code> pool and per-run seeded RNGs, so results are bit-identical on 1 or 8 threads. ThreadSanitizer caught a data race inside <code>std::binomial_distribution</code>, which I fixed by writing a custom binomial sampler. The suite of 46 tests runs clean under Thread, Address, and UB sanitizers.</p>
+    <p class="noindent">Links: <a href="https://github.com/fenetdiriba/epidemic-simulator-model" target="_blank" style="color:var(--link)">source</a></p>
+    <p>Stack: <span class="stag">C++17</span><span class="stag">Multithreading</span><span class="stag">Stochastic Modeling</span><span class="stag">Numerical Methods</span><span class="stag">Sanitizers</span></p>
 
     <div class="subsec-title">3.4 &nbsp; ML Code Review Assistant</div>
-    <p class="noindent">A VS Code extension that monitors active Jupyter notebooks and provides real-time, context-aware code reviews via NVIDIA-backed LLM agents. A Python/Flask backend uses LangChain and Pydantic-typed structured outputs to parse notebook cells, variables, and data shapes into validated JSON feedback.</p>
-    <p>Stack: <span class="stag">TypeScript</span><span class="stag">Python</span><span class="stag">Flask</span><span class="stag">LangChain</span><span class="stag">VS Code API</span></p>
+    <p class="noindent">A VS Code extension that watches the active Jupyter notebook and reviews its machine learning code in a side panel. It extracts cells, variables, and data shapes, then sends them to an LLM agent (Gemma 2 9B via NVIDIA AI endpoints). The agent assesses the code across seven dimensions, including data handling, model implementation, and performance. It explains each suggested improvement, recommends visualizations suited to the data, and generates ready-to-paste code cells on request, with a chat interface for follow-up questions.</p>
+    <p>A Flask REST backend built on LangChain returns Pydantic-typed structured outputs, so feedback arrives as validated JSON rather than free text. A JSON-repair step recovers responses the model wraps in extra text, and a fallback keeps the extension usable when the model API is unavailable.</p>
+    <p class="noindent">Links: <a href="https://github.com/fenetdiriba/ml-code-review-agent1" target="_blank" style="color:var(--link)">source</a></p>
+    <p>Stack: <span class="stag">TypeScript</span><span class="stag">VS Code API</span><span class="stag">Python</span><span class="stag">Flask</span><span class="stag">LangChain</span><span class="stag">Pydantic</span><span class="stag">NVIDIA AI</span></p>
   </div>
 
   <div class="hr-single"></div>
